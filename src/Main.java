@@ -22,7 +22,7 @@ public class Main {
             try {
                 bufferedReader = new BufferedReader(new FileReader(file));
             } catch (FileNotFoundException e) {
-                System.out.println(e);
+                System.out.println("Exception"+e.toString());
                 e.printStackTrace();
             }
             String st;
@@ -35,7 +35,21 @@ public class Main {
 
         }
         else  if(Option == 3){
+            File file = new File("C:\\Users\\TEC\\Desktop\\JavaStudent_list\\src\\Student.txt");
+            BufferedReader bufferedReader = null;
+            try {
+                bufferedReader = new BufferedReader(new FileReader(file));
+            } catch (FileNotFoundException e) {
+                System.out.println("Exception"+e.toString());
+                e.printStackTrace();
+            }
+            String st;
+            int count = 0;
+            while ((st = bufferedReader.readLine())!= null){
+                count++;
 
+            }
+            System.out.println("Number of Students"+count);
         }
         else if(Option == 4){
 
