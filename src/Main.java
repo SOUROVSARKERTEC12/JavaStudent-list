@@ -53,6 +53,16 @@ public class Main {
         }
         else if(Option == 4){
 
+            FileWriter fileWriter = new FileWriter(Constants.TEXT_FILE_NAME,true);
+
+            System.out.print("Enter your new student name :");
+            String addst = scanner.next();
+
+            fileWriter.write("\n"+addst);
+            fileWriter.close();
+
+            System.out.println("Student Added");
+
         }
         else if(Option == 5){
             File file = new File("C:\\Users\\TEC\\Desktop\\JavaStudent_list\\src\\Student.txt");
