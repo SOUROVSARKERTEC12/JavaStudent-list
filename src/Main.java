@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -16,61 +17,84 @@ public class Main {
 
         int Option = scanner.nextInt();
 
-        if (Option == 1 ){
+        if (Option == 1) {
             File file = new File(Constants.TEXT_FILE_NAME);
             BufferedReader bufferedReader = null;
             try {
                 bufferedReader = new BufferedReader(new FileReader(file));
             } catch (FileNotFoundException e) {
-                System.out.println("Exception"+e.toString());
+                System.out.println("Exception" + e.toString());
                 e.printStackTrace();
             }
             String st;
-            while ((st = bufferedReader.readLine())!= null){
+            while ((st = bufferedReader.readLine()) != null) {
                 System.out.println(st);
 
             }
-        }
-        else if(Option == 2){
+        } else if (Option == 2) {
+            int count = getNumberOfStdents();
 
-        }
-        else  if(Option == 3){
+            File file = new File(Constants.TEXT_FILE_NAME);
+            BufferedReader bufferedReader = null;
+
+            try {
+                bufferedReader = new BufferedReader(new FileReader(file));
+            } catch (Exception e) {
+                System.out.println("Exception :" + e.toString());
+            }
+
+            String[] ids = new String[count];
+
+            int i = 0;
+
+            String string;
+
+            while ((string = bufferedReader.readLine()) != null) {
+                if (string.equals("")) {
+                    continue;
+                }
+                ids[i] = string;
+                i++;
+            }
+
+            int randNumber = randInt(0, ids.length - 1);
+
+            System.out.println("Random Students :" + ids[randNumber]);
+        } else if (Option == 3) {
             File file = new File("C:\\Users\\TEC\\Desktop\\JavaStudent_list\\src\\Student.txt");
             BufferedReader bufferedReader = null;
             try {
                 bufferedReader = new BufferedReader(new FileReader(file));
             } catch (FileNotFoundException e) {
-                System.out.println("Exception"+e.toString());
+                System.out.println("Exception" + e.toString());
                 e.printStackTrace();
             }
             String st;
             int count = 0;
-            while ((st = bufferedReader.readLine())!= null){
+            while ((st = bufferedReader.readLine()) != null) {
                 count++;
 
             }
-            System.out.println("Number of Students"+count);
-        }
-        else if(Option == 4){
+            System.out.println("Number of Students" + count);
+        } else if (Option == 4) {
 
-            FileWriter fileWriter = new FileWriter(Constants.TEXT_FILE_NAME,true);
+            FileWriter fileWriter = new FileWriter(Constants.TEXT_FILE_NAME, true);
 
             System.out.print("Enter your new student name :");
             String addst = scanner.next();
 
-            fileWriter.write("\n"+addst);
+            fileWriter.write("\n" + addst);
             fileWriter.close();
 
             System.out.println("Student Added");
 
-        }
-        else if(Option == 5){
+        } else if (Option == 5) {
             File file = new File("C:\\Users\\TEC\\Desktop\\JavaStudent_list\\src\\Student.txt");
             BufferedReader bufferedReader = null;
             try {
                 bufferedReader = new BufferedReader(new FileReader(file));
             } catch (FileNotFoundException e) {
-                System.out.println("Exception"+e.toString());
+                System.out.println("Exception" + e.toString());
                 e.printStackTrace();
             }
 
@@ -78,23 +102,55 @@ public class Main {
             String checkst = scanner.next();
             String st;
             int flag = 0;
-            while ((st = bufferedReader.readLine())!= null){
-                if(st.equals(checkst)) {
+            while ((st = bufferedReader.readLine()) != null) {
+                if (st.equals(checkst)) {
                     flag++;
                 }
-        }
-            if(flag == 0)
+            }
+            if (flag == 0)
                 System.out.println("Not found");
-        else {
-            System.out.println("Found");
-        }
+            else {
+                System.out.println("Found");
+            }
 
 
         }
     }
+
+    public static int randInt(int min, int max){
+        Random random = new Random();
+        int randomNum = random.nextInt((max - min)+1)+min;
+
+        return randomNum;
+    }
+
+    public static int getNumberOfStdents() throws IOException{
+        File file = new File(Constants.TEXT_FILE_NAME);
+        BufferedReader bufferedReader = null;
+
+        try{
+            bufferedReader = new BufferedReader(new FileReader(file));
+        }
+        catch (Exception e){
+            System.out.println("Exception "+e.toString());
+        }
+
+        String string;
+
+        int count =0;
+
+        while((string = bufferedReader.readLine())!=null){
+            if(string.equals("")){
+                continue;
+            }
+            count ++;
+        }
+        return count;
+    }
 }
 
-   /* public void file()throws Exception{
+
+   /* public static void file()throws Exception{
         File file = new File("C:\\Users\\TEC\\Desktop\\JavaStudent_list\\src\\Student.txt");
         BufferedReader bufferedReader = null;
         try {
